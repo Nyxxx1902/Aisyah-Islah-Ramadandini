@@ -1,0 +1,243 @@
+<!DOCTYPE html> 
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Adikku 🎂💖</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: no-repeat center center/cover;
+      text-align: center;
+      color: #ff4da6;
+      overflow-x: hidden;
+    }
+
+    .overlay {
+      background: rgba(255, 255, 255, 0.8);
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #ff3399;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    /* Typing effect */
+    .typing {
+      font-size: 16px;
+      color: #444;
+      background: #fff0f6;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      max-width: 90%;
+      margin: 20px auto;
+      line-height: 1.6;
+      border-left: 4px solid #ff66b2;
+      text-align: left;
+      min-height: 100px;
+    }
+
+    /* Slideshow */
+    .slideshow {
+      display: none;
+      margin: 20px auto;
+      max-width: 90%;
+    }
+
+    .slideshow img {
+      width: 100%;
+      border-radius: 15px;
+      border: 4px solid #ff99cc;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      display: none;
+    }
+
+    .slideshow img.active {
+      display: block;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Button */
+    button {
+      margin-top: 15px;
+      padding: 12px 25px;
+      font-size: 16px;
+      background: #ff66b2;
+      border: none;
+      border-radius: 25px;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #ff3385;
+    }
+
+    .hidden {
+      display: none;
+      margin-top: 15px;
+      font-size: 16px;
+      color: #ff3399;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    #confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    /* Responsive text */
+    @media (max-width: 600px) {
+      h1 { font-size: 20px; }
+      p, .typing { font-size: 14px; }
+      button { font-size: 14px; padding: 10px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <h1>🎉 Selamat Ulang Tahun, Aisyah Islah Ramadandini! 🎂</h1>
+    <p>Hari ini hari spesialmu dan kakak bangga banget punya adik sepertimu 💖</p>
+
+    <!-- Typing text -->
+    <div class="typing" id="typingText"></div>
+
+    <!-- Slideshow -->
+    <div class="slideshow" id="slideshow">
+      <img src="images/foto1.jpg" alt="Foto 1" class="active">
+      <img src="images/foto2.jpg" alt="Foto 2">
+      <img src="images/foto3.jpg" alt="Foto 3">
+      <img src="images/foto4.jpg" alt="Foto 4">
+      <img src="images/foto5.jpg" alt="Foto 5">
+    </div>
+
+    <!-- Tombol kejutan -->
+    <button id="btnSurprise">Klik untuk kejutan 🎁</button>
+    <p id="surpriseText" class="hidden">Kakak sayang banget sama kamu 💕</p>
+  </div>
+
+  <canvas id="confetti"></canvas>
+  <audio id="music" src="C:\Airin\music/happy-birthday-357371.mp3" preload="auto"></audio>
+
+  <script>
+    const typingText = document.getElementById("typingText");
+    const slideshow = document.getElementById("slideshow");
+    const slides = document.querySelectorAll(".slideshow img");
+
+    const message = `Dear adikku tersayang,\n
+Terima kasih sudah selalu jadi cahaya di keluarga kita. Kamu bukan cuma adik, tapi juga sahabat, tempat curhat, dan kebanggaan kakak.\n
+Semoga di umur barumu ini, semua doa-doa baik datang padamu: panjang umur, sehat selalu, dimudahkan segala urusan, dan dikelilingi kebahagiaan tanpa henti 🌸\n
+Ingat, kakak selalu ada di sini buat dukung kamu, apapun yang terjadi. Jangan pernah ragu untuk mengejar mimpi-mimpimu, karena kamu luar biasa dan pantas mendapatkan yang terbaik ✨\n
+Love you so much 💕`;
+
+    let i = 0;
+    function typeEffect() {
+      if (i < message.length) {
+        typingText.innerHTML += message.charAt(i) === "\n" ? "<br>" : message.charAt(i);
+        i++;
+        setTimeout(typeEffect, 50);
+      } else {
+        // Setelah selesai ngetik, tampilkan slideshow
+        setTimeout(() => {
+          slideshow.style.display = "block";
+          startSlideshow();
+        }, 1500);
+      }
+    }
+    typeEffect();
+
+    // Slideshow otomatis
+    let slideIndex = 0;
+    function startSlideshow() {
+      setInterval(() => {
+        slides[slideIndex].classList.remove("active");
+        slideIndex = (slideIndex + 1) % slides.length;
+        slides[slideIndex].classList.add("active");
+      }, 3000);
+    }
+
+    // Tombol kejutan
+    const btn = document.getElementById("btnSurprise");
+    const surpriseText = document.getElementById("surpriseText");
+    const music = document.getElementById("music");
+
+    btn.addEventListener("click", () => {
+      surpriseText.classList.toggle("hidden");
+      startConfetti();
+
+      // ✅ tambahin anti-error autoplay
+      music.play().catch(err => {
+        console.log("Audio gagal play:", err);
+        alert("Klik tombol sekali lagi supaya musik bisa diputar 🎶");
+      });
+    });
+
+    // Confetti
+    function startConfetti() {
+      const canvas = document.getElementById("confetti");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      let confetti = [];
+      for (let i = 0; i < 150; i++) {
+        confetti.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 6 + 2,
+          d: Math.random() * 10,
+          color: `hsl(${Math.random() * 360}, 100%, 50%)`
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        confetti.forEach((c) => {
+          ctx.beginPath();
+          ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2, false);
+          ctx.fillStyle = c.color;
+          ctx.fill();
+        });
+        update();
+      }
+
+      function update() {
+        confetti.forEach((c) => {
+          c.y += Math.cos(c.d) + 1 + c.r / 2;
+          if (c.y > canvas.height) {
+            c.y = -10;
+            c.x = Math.random() * canvas.width;
+          }
+        });
+      }
+
+      setInterval(draw, 20);
+    }
+  </script>
+</body>
+</html>
