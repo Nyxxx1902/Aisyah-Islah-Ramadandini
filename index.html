@@ -1,9 +1,10 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Happy Birthday Adikku 🎂💖</title>
+  <link rel="icon" href="images/favicon.ico"> <!-- opsional -->
   <style>
     body {
       margin: 0;
@@ -36,7 +37,6 @@
       margin-bottom: 15px;
     }
 
-    /* Typing effect */
     .typing {
       font-size: 16px;
       color: #444;
@@ -52,7 +52,6 @@
       min-height: 100px;
     }
 
-    /* Slideshow */
     .slideshow {
       display: none;
       margin: 20px auto;
@@ -77,7 +76,6 @@
       to { opacity: 1; }
     }
 
-    /* Button */
     button {
       margin-top: 15px;
       padding: 12px 25px;
@@ -111,7 +109,6 @@
       pointer-events: none;
     }
 
-    /* Responsive text */
     @media (max-width: 600px) {
       h1 { font-size: 20px; }
       p, .typing { font-size: 14px; }
@@ -124,10 +121,8 @@
     <h1>🎉 Selamat Ulang Tahun, Aisyah Islah Ramadandini! 🎂</h1>
     <p>Hari ini hari spesialmu dan kakak bangga banget punya adik sepertimu 💖</p>
 
-    <!-- Typing text -->
     <div class="typing" id="typingText"></div>
 
-    <!-- Slideshow -->
     <div class="slideshow" id="slideshow">
       <img src="images/foto1.jpg" alt="Foto 1" class="active">
       <img src="images/foto2.jpg" alt="Foto 2">
@@ -136,13 +131,14 @@
       <img src="images/foto5.jpg" alt="Foto 5">
     </div>
 
-    <!-- Tombol kejutan -->
     <button id="btnSurprise">Klik untuk kejutan 🎁</button>
     <p id="surpriseText" class="hidden">Kakak sayang banget sama kamu 💕</p>
   </div>
 
   <canvas id="confetti"></canvas>
-  <audio id="music" src="C:\Airin\music/happy-birthday-357371.mp3" preload="auto"></audio>
+
+  <!-- ✅ path audio sudah diganti relatif ke folder project -->
+  <audio id="music" src="music/happy-birthday-357371.mp3" preload="auto"></audio>
 
   <script>
     const typingText = document.getElementById("typingText");
@@ -162,7 +158,6 @@ Love you so much 💕`;
         i++;
         setTimeout(typeEffect, 50);
       } else {
-        // Setelah selesai ngetik, tampilkan slideshow
         setTimeout(() => {
           slideshow.style.display = "block";
           startSlideshow();
@@ -171,7 +166,6 @@ Love you so much 💕`;
     }
     typeEffect();
 
-    // Slideshow otomatis
     let slideIndex = 0;
     function startSlideshow() {
       setInterval(() => {
@@ -181,7 +175,6 @@ Love you so much 💕`;
       }, 3000);
     }
 
-    // Tombol kejutan
     const btn = document.getElementById("btnSurprise");
     const surpriseText = document.getElementById("surpriseText");
     const music = document.getElementById("music");
@@ -190,14 +183,12 @@ Love you so much 💕`;
       surpriseText.classList.toggle("hidden");
       startConfetti();
 
-      // ✅ tambahin anti-error autoplay
       music.play().catch(err => {
         console.log("Audio gagal play:", err);
         alert("Klik tombol sekali lagi supaya musik bisa diputar 🎶");
       });
     });
 
-    // Confetti
     function startConfetti() {
       const canvas = document.getElementById("confetti");
       const ctx = canvas.getContext("2d");
